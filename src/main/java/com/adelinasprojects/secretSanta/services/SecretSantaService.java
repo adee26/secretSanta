@@ -33,4 +33,6 @@ public class SecretSantaService {
 
         return secretSantaList;
     }
+
+    /** TO DO: Set persons in groups **/
 }
