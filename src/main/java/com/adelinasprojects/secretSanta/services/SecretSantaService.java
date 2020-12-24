@@ -1,33 +1,33 @@
 package com.adelinasprojects.secretSanta.services;
 
-import com.adelinasprojects.secretSanta.entities.Person;
-import com.adelinasprojects.secretSanta.repositories.PersonRepository;
+import com.adelinasprojects.secretSanta.entities.User;
+import com.adelinasprojects.secretSanta.repositories.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
 
 @Service
 public class SecretSantaService {
-    private final PersonRepository personRepository;
+    private final UserRepository userRepository;
 
-    public SecretSantaService(PersonRepository personRepository) {
-        this.personRepository = personRepository;
+    public SecretSantaService(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
-    public Map<Person, Person> assignSecretSanta(){
-        Map<Person, Person> secretSantaList = new HashMap<>();
-        List<Person> personList = personRepository.findAll();
-        List<Person> randomPersonList = personRepository.findAll();
+    public Map<User, User> assignSecretSanta(){
+        Map<User, User> secretSantaList = new HashMap<>();
+        List<User> userList = userRepository.findAll();
+        List<User> randomUserList = userRepository.findAll();
         int count = 0;
         Random random = new Random();
 
-        while (!randomPersonList.isEmpty()){
-            Person randomPerson = randomPersonList.get(random.nextInt(randomPersonList.size()));
-            while(personList.get(count).equals(randomPerson)){
-                randomPerson = randomPersonList.get(random.nextInt(randomPersonList.size()));
+        while (!randomUserList.isEmpty()){
+            User randomUser = randomUserList.get(random.nextInt(randomUserList.size()));
+            while(userList.get(count).equals(randomUser)){
+                randomUser = randomUserList.get(random.nextInt(randomUserList.size()));
             }
-            secretSantaList.put(personList.get(count), randomPerson);
-            randomPersonList.remove(randomPerson);
+            secretSantaList.put(userList.get(count), randomUser);
+            randomUserList.remove(randomUser);
             count++;
         }
 
